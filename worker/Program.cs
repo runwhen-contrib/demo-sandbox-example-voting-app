@@ -50,6 +50,13 @@ namespace Worker
                         }
                         else
                         { // Normal +1 vote requested
+			    if (vote.vote == "a") {
+				try{
+					throw new Exception($"The Voter {vote.voter_id} failed to have its vote: {vote.vote} processed.");
+				}catch(Exception ex){
+					Console.WriteLine($"Exception Occured During Work: {ex}");
+				}
+			    }
                             UpdateVote(pgsql, vote.voter_id, vote.vote);
                         }
                     }
